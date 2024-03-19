@@ -95,7 +95,7 @@ public class ShowcasesCustomShowcaseThumbnailsApiTest {
     /**
      * Get all the custom thumbnails of a showcase
      *
-     * This method returns every custom thumbnail of the specified showcase. The authenticated user must be the owner of the showcase.
+     * This method returns every custom thumbnail of the specified showcase.
      *
      * @throws ApiException if the Api call fails
      */

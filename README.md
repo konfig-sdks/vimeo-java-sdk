@@ -1,4 +1,4 @@
-<div align="center">
+<div align="left">
 
 [![Visit Vimeo](./header.png)](https://developer.vimeo.com)
 
@@ -440,6 +440,7 @@ Class | Method | HTTP request | Description
 *OnDemandVideosApi* | [**removeFromPage**](docs/OnDemandVideosApi.md#removeFromPage) | **DELETE** /ondemand/pages/{ondemand_id}/videos/{video_id} | Remove a video from an On Demand page
 *OnDemandVideosApi* | [**specificVideoGet**](docs/OnDemandVideosApi.md#specificVideoGet) | **GET** /ondemand/pages/{ondemand_id}/videos/{video_id} | Get a specific video on an On Demand page
 *PaymentsEssentialsApi* | [**getPaymentMethodInfo**](docs/PaymentsEssentialsApi.md#getPaymentMethodInfo) | **GET** /me/payment_methods/{payment_method_id} | Get information about a payments service payment method
+*PaymentsEssentialsApi* | [**getSubscriptionInfo**](docs/PaymentsEssentialsApi.md#getSubscriptionInfo) | **GET** /users/{user_id}/{subscription_id} | Get information about a payments service subscription
 *PaymentsEssentialsApi* | [**listPaymentMethods**](docs/PaymentsEssentialsApi.md#listPaymentMethods) | **GET** /me/payment_methods | Get a list of all payments service payment methods
 *PortfoliosEssentialsApi* | [**getAllUserPortfolios**](docs/PortfoliosEssentialsApi.md#getAllUserPortfolios) | **GET** /me/portfolios | Get all the portfolios that belong to the user
 *PortfoliosEssentialsApi* | [**getUserPortfolio**](docs/PortfoliosEssentialsApi.md#getUserPortfolio) | **GET** /me/portfolios/{portfolio_id} | Get a specific portfolio
@@ -1120,6 +1121,8 @@ Class | Method | HTTP request | Description
  - [ShowcasesShowcaseVideosReplaceShowcaseVideosRequest](docs/ShowcasesShowcaseVideosReplaceShowcaseVideosRequest.md)
  - [ShowcasesShowcaseVideosReplaceVideosRequest](docs/ShowcasesShowcaseVideosReplaceVideosRequest.md)
  - [Skill](docs/Skill.md)
+ - [Subscription](docs/Subscription.md)
+ - [SubscriptionItemsInner](docs/SubscriptionItemsInner.md)
  - [SubscriptionPlans](docs/SubscriptionPlans.md)
  - [SubscriptionPlansCurrency](docs/SubscriptionPlansCurrency.md)
  - [SubscriptionPlansDiscount](docs/SubscriptionPlansDiscount.md)

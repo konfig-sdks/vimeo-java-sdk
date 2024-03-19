@@ -1552,7 +1552,7 @@ null (empty response body)
 
 <a name="videos_1"></a>
 # **videos_1**
-> List&lt;Video&gt; videos_1(query).direction(direction).filter(filter).links(links).page(page).perPage(perPage).sort(sort).uris(uris).execute();
+> List&lt;Video&gt; videos_1().direction(direction).filter(filter).links(links).page(page).perPage(perPage).query(query).sort(sort).uris(uris).execute();
 
 Search for videos
 
@@ -1586,23 +1586,24 @@ public class Example {
     // Configure OAuth2 access token for authorization: oauth2
     configuration.accessToken = "YOUR ACCESS TOKEN";
     Vimeo client = new Vimeo(configuration);
-    String query = "staff picks"; // The search query.
     String direction = "asc"; // The sort direction of the results.  Option descriptions:  * `asc` - Sort the results in ascending order.  * `desc` - Sort the results in descending order. 
     String filter = "CC"; // The attribute by which to filter the results. `CC` and related filters target videos with the corresponding Creative Commons licenses. For more information, see our [Creative Commons](https://vimeo.com/creativecommons) page.  Option descriptions:  * `CC` - Return videos under any Creative Commons license.  * `CC-BY` - Return CC BY, or attribution-only, videos.  * `CC-BY-NC` - Return CC BY-NC, or Attribution-NonCommercial, videos.  * `CC-BY-NC-ND` - Return CC BY-NC-ND, or Attribution-NonCommercial-NoDerivs, videos.  * `CC-BY-NC-SA` - Return CC BY-NC-SA, or Attribution-NonCommercial-ShareAlike, videos.  * `CC-BY-ND` - Return CC BY-ND, or Attribution-NoDerivs, videos.  * `CC-BY-SA` - Return CC BY-SA, or Attribution-ShareAlike, videos.  * `CC0` - Return CC0, or public domain, videos.  * `categories` - Filter by categories.  * `duration` - Filter by duration.  * `in-progress` - Return in-progress videos.  * `minimum_likes` - Filter by minimum likes.  * `trending` - Return trending videos.  * `upload_date` - Filter by upload date. 
     String links = "https://vimeo.com/122375452,https://vimeo.com/273576296"; // A comma-separated list of video URLs to find. Querying, filtering, and sorting aren't supported when using this field.
     Double page = 1D; // The page number of the results to show.
     Double perPage = 10D; // The number of items to show on each page of results, up to a maximum of 100.
+    String query = "staff picks"; // The search query.
     String sort = "alphabetical"; // The way to sort the results.  Option descriptions:  * `alphabetical` - Sort the results alphabetically.  * `comments` - Sort the results by number of comments.  * `date` - Sort the results by date.  * `duration` - Sort the results by duration.  * `likes` - Sort the results by number of likes.  * `plays` - Sort the results by number of plays.  * `relevant` - Sort the results by relevance. 
     String uris = "/videos/122375452,/videos/273576296"; // A comma-separated list of video URIs to find. Querying, filtering, and sorting aren't supported when using this field.
     try {
       List<Video> result = client
               .videosEssentials
-              .videos_1(query)
+              .videos_1()
               .direction(direction)
               .filter(filter)
               .links(links)
               .page(page)
               .perPage(perPage)
+              .query(query)
               .sort(sort)
               .uris(uris)
               .execute();
@@ -1619,12 +1620,13 @@ public class Example {
     try {
       ApiResponse<List<Video>> response = client
               .videosEssentials
-              .videos_1(query)
+              .videos_1()
               .direction(direction)
               .filter(filter)
               .links(links)
               .page(page)
               .perPage(perPage)
+              .query(query)
               .sort(sort)
               .uris(uris)
               .executeWithHttpInfo();
@@ -1649,12 +1651,12 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **query** | **String**| The search query. | |
 | **direction** | **String**| The sort direction of the results.  Option descriptions:  * &#x60;asc&#x60; - Sort the results in ascending order.  * &#x60;desc&#x60; - Sort the results in descending order.  | [optional] [enum: asc, desc] |
 | **filter** | **String**| The attribute by which to filter the results. &#x60;CC&#x60; and related filters target videos with the corresponding Creative Commons licenses. For more information, see our [Creative Commons](https://vimeo.com/creativecommons) page.  Option descriptions:  * &#x60;CC&#x60; - Return videos under any Creative Commons license.  * &#x60;CC-BY&#x60; - Return CC BY, or attribution-only, videos.  * &#x60;CC-BY-NC&#x60; - Return CC BY-NC, or Attribution-NonCommercial, videos.  * &#x60;CC-BY-NC-ND&#x60; - Return CC BY-NC-ND, or Attribution-NonCommercial-NoDerivs, videos.  * &#x60;CC-BY-NC-SA&#x60; - Return CC BY-NC-SA, or Attribution-NonCommercial-ShareAlike, videos.  * &#x60;CC-BY-ND&#x60; - Return CC BY-ND, or Attribution-NoDerivs, videos.  * &#x60;CC-BY-SA&#x60; - Return CC BY-SA, or Attribution-ShareAlike, videos.  * &#x60;CC0&#x60; - Return CC0, or public domain, videos.  * &#x60;categories&#x60; - Filter by categories.  * &#x60;duration&#x60; - Filter by duration.  * &#x60;in-progress&#x60; - Return in-progress videos.  * &#x60;minimum_likes&#x60; - Filter by minimum likes.  * &#x60;trending&#x60; - Return trending videos.  * &#x60;upload_date&#x60; - Filter by upload date.  | [optional] [enum: CC, CC-BY, CC-BY-NC, CC-BY-NC-ND, CC-BY-NC-SA, CC-BY-ND, CC-BY-SA, CC0, categories, duration, in-progress, minimum_likes, trending, upload_date] |
 | **links** | **String**| A comma-separated list of video URLs to find. Querying, filtering, and sorting aren&#39;t supported when using this field. | [optional] |
 | **page** | **Double**| The page number of the results to show. | [optional] |
 | **perPage** | **Double**| The number of items to show on each page of results, up to a maximum of 100. | [optional] |
+| **query** | **String**| The search query. | [optional] |
 | **sort** | **String**| The way to sort the results.  Option descriptions:  * &#x60;alphabetical&#x60; - Sort the results alphabetically.  * &#x60;comments&#x60; - Sort the results by number of comments.  * &#x60;date&#x60; - Sort the results by date.  * &#x60;duration&#x60; - Sort the results by duration.  * &#x60;likes&#x60; - Sort the results by number of likes.  * &#x60;plays&#x60; - Sort the results by number of plays.  * &#x60;relevant&#x60; - Sort the results by relevance.  | [optional] [enum: alphabetical, comments, date, duration, likes, plays, relevant] |
 | **uris** | **String**| A comma-separated list of video URIs to find. Querying, filtering, and sorting aren&#39;t supported when using this field. | [optional] |
 

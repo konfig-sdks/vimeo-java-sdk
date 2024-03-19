@@ -63,6 +63,10 @@ public class Analytics {
   @SerializedName(SERIALIZED_NAME_COUNTRY)
   private AnalyticsCountry country;
 
+  public static final String SERIALIZED_NAME_DEVICE_TYPE = "device_type";
+  @SerializedName(SERIALIZED_NAME_DEVICE_TYPE)
+  private String deviceType;
+
   public static final String SERIALIZED_NAME_DOWNLOADS = "downloads";
   @SerializedName(SERIALIZED_NAME_DOWNLOADS)
   private Double downloads;
@@ -212,6 +216,35 @@ public class Analytics {
     
     
     this.country = country;
+  }
+
+
+  public Analytics deviceType(String deviceType) {
+    
+    
+    
+    
+    this.deviceType = deviceType;
+    return this;
+  }
+
+   /**
+   * The type of device.
+   * @return deviceType
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "Desktop", required = true, value = "The type of device.")
+
+  public String getDeviceType() {
+    return deviceType;
+  }
+
+
+  public void setDeviceType(String deviceType) {
+    
+    
+    
+    this.deviceType = deviceType;
   }
 
 
@@ -654,6 +687,7 @@ public class Analytics {
     return Objects.equals(this.averagePercentWatched, analytics.averagePercentWatched) &&
         Objects.equals(this.averageTimeWatched, analytics.averageTimeWatched) &&
         Objects.equals(this.country, analytics.country) &&
+        Objects.equals(this.deviceType, analytics.deviceType) &&
         Objects.equals(this.downloads, analytics.downloads) &&
         Objects.equals(this.embedDomain, analytics.embedDomain) &&
         Objects.equals(this.endDate, analytics.endDate) &&
@@ -670,7 +704,7 @@ public class Analytics {
 
   @Override
   public int hashCode() {
-    return Objects.hash(averagePercentWatched, averageTimeWatched, country, downloads, embedDomain, endDate, finishes, impressions, metadata, startDate, totalTimeWatched, uniqueImpressions, uniqueViewers, views, additionalProperties);
+    return Objects.hash(averagePercentWatched, averageTimeWatched, country, deviceType, downloads, embedDomain, endDate, finishes, impressions, metadata, startDate, totalTimeWatched, uniqueImpressions, uniqueViewers, views, additionalProperties);
   }
 
   @Override
@@ -680,6 +714,7 @@ public class Analytics {
     sb.append("    averagePercentWatched: ").append(toIndentedString(averagePercentWatched)).append("\n");
     sb.append("    averageTimeWatched: ").append(toIndentedString(averageTimeWatched)).append("\n");
     sb.append("    country: ").append(toIndentedString(country)).append("\n");
+    sb.append("    deviceType: ").append(toIndentedString(deviceType)).append("\n");
     sb.append("    downloads: ").append(toIndentedString(downloads)).append("\n");
     sb.append("    embedDomain: ").append(toIndentedString(embedDomain)).append("\n");
     sb.append("    endDate: ").append(toIndentedString(endDate)).append("\n");
@@ -717,6 +752,7 @@ public class Analytics {
     openapiFields.add("average_percent_watched");
     openapiFields.add("average_time_watched");
     openapiFields.add("country");
+    openapiFields.add("device_type");
     openapiFields.add("downloads");
     openapiFields.add("embed_domain");
     openapiFields.add("end_date");
@@ -734,6 +770,7 @@ public class Analytics {
     openapiRequiredFields.add("average_percent_watched");
     openapiRequiredFields.add("average_time_watched");
     openapiRequiredFields.add("country");
+    openapiRequiredFields.add("device_type");
     openapiRequiredFields.add("downloads");
     openapiRequiredFields.add("embed_domain");
     openapiRequiredFields.add("end_date");
@@ -768,6 +805,9 @@ public class Analytics {
       }
       // validate the required field `country`
       AnalyticsCountry.validateJsonObject(jsonObj.getAsJsonObject("country"));
+      if (!jsonObj.get("device_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `device_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("device_type").toString()));
+      }
       if (!jsonObj.get("embed_domain").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `embed_domain` to be a primitive type in the JSON string but got `%s`", jsonObj.get("embed_domain").toString()));
       }

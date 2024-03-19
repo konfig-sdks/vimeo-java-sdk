@@ -2635,7 +2635,7 @@ public class VideosEssentialsApiGenerated {
 
         return new Videos0RequestBuilder(userId, uris);
     }
-    private okhttp3.Call videos_1Call(String query, String direction, String filter, String links, Double page, Double perPage, String sort, String uris, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call videos_1Call(String direction, String filter, String links, Double page, Double perPage, String query, String sort, String uris, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2712,43 +2712,37 @@ public class VideosEssentialsApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call videos_1ValidateBeforeCall(String query, String direction, String filter, String links, Double page, Double perPage, String sort, String uris, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'query' is set
-        if (query == null) {
-            throw new ApiException("Missing the required parameter 'query' when calling videos_1(Async)");
-        }
-
-        return videos_1Call(query, direction, filter, links, page, perPage, sort, uris, _callback);
+    private okhttp3.Call videos_1ValidateBeforeCall(String direction, String filter, String links, Double page, Double perPage, String query, String sort, String uris, final ApiCallback _callback) throws ApiException {
+        return videos_1Call(direction, filter, links, page, perPage, query, sort, uris, _callback);
 
     }
 
 
-    private ApiResponse<List<Video>> videos_1WithHttpInfo(String query, String direction, String filter, String links, Double page, Double perPage, String sort, String uris) throws ApiException {
-        okhttp3.Call localVarCall = videos_1ValidateBeforeCall(query, direction, filter, links, page, perPage, sort, uris, null);
+    private ApiResponse<List<Video>> videos_1WithHttpInfo(String direction, String filter, String links, Double page, Double perPage, String query, String sort, String uris) throws ApiException {
+        okhttp3.Call localVarCall = videos_1ValidateBeforeCall(direction, filter, links, page, perPage, query, sort, uris, null);
         Type localVarReturnType = new TypeToken<List<Video>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call videos_1Async(String query, String direction, String filter, String links, Double page, Double perPage, String sort, String uris, final ApiCallback<List<Video>> _callback) throws ApiException {
+    private okhttp3.Call videos_1Async(String direction, String filter, String links, Double page, Double perPage, String query, String sort, String uris, final ApiCallback<List<Video>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = videos_1ValidateBeforeCall(query, direction, filter, links, page, perPage, sort, uris, _callback);
+        okhttp3.Call localVarCall = videos_1ValidateBeforeCall(direction, filter, links, page, perPage, query, sort, uris, _callback);
         Type localVarReturnType = new TypeToken<List<Video>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public class Videos1RequestBuilder {
-        private final String query;
         private String direction;
         private String filter;
         private String links;
         private Double page;
         private Double perPage;
+        private String query;
         private String sort;
         private String uris;
 
-        private Videos1RequestBuilder(String query) {
-            this.query = query;
+        private Videos1RequestBuilder() {
         }
 
         /**
@@ -2802,6 +2796,16 @@ public class VideosEssentialsApiGenerated {
         }
         
         /**
+         * Set query
+         * @param query The search query. (optional)
+         * @return Videos1RequestBuilder
+         */
+        public Videos1RequestBuilder query(String query) {
+            this.query = query;
+            return this;
+        }
+        
+        /**
          * Set sort
          * @param sort The way to sort the results.  Option descriptions:  * &#x60;alphabetical&#x60; - Sort the results alphabetically.  * &#x60;comments&#x60; - Sort the results by number of comments.  * &#x60;date&#x60; - Sort the results by date.  * &#x60;duration&#x60; - Sort the results by duration.  * &#x60;likes&#x60; - Sort the results by number of likes.  * &#x60;plays&#x60; - Sort the results by number of plays.  * &#x60;relevant&#x60; - Sort the results by relevance.  (optional)
          * @return Videos1RequestBuilder
@@ -2833,7 +2837,7 @@ public class VideosEssentialsApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return videos_1Call(query, direction, filter, links, page, perPage, sort, uris, _callback);
+            return videos_1Call(direction, filter, links, page, perPage, query, sort, uris, _callback);
         }
 
 
@@ -2848,7 +2852,7 @@ public class VideosEssentialsApiGenerated {
          </table>
          */
         public List<Video> execute() throws ApiException {
-            ApiResponse<List<Video>> localVarResp = videos_1WithHttpInfo(query, direction, filter, links, page, perPage, sort, uris);
+            ApiResponse<List<Video>> localVarResp = videos_1WithHttpInfo(direction, filter, links, page, perPage, query, sort, uris);
             return localVarResp.getResponseBody();
         }
 
@@ -2863,7 +2867,7 @@ public class VideosEssentialsApiGenerated {
          </table>
          */
         public ApiResponse<List<Video>> executeWithHttpInfo() throws ApiException {
-            return videos_1WithHttpInfo(query, direction, filter, links, page, perPage, sort, uris);
+            return videos_1WithHttpInfo(direction, filter, links, page, perPage, query, sort, uris);
         }
 
         /**
@@ -2878,14 +2882,13 @@ public class VideosEssentialsApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<Video>> _callback) throws ApiException {
-            return videos_1Async(query, direction, filter, links, page, perPage, sort, uris, _callback);
+            return videos_1Async(direction, filter, links, page, perPage, query, sort, uris, _callback);
         }
     }
 
     /**
      * Search for videos
      * This method returns all the videos that match custom search criteria.
-     * @param query The search query. (required)
      * @return Videos1RequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -2893,10 +2896,7 @@ public class VideosEssentialsApiGenerated {
         <tr><td> 200 </td><td> The search results were returned. </td><td>  -  </td></tr>
      </table>
      */
-    public Videos1RequestBuilder videos_1(String query) throws IllegalArgumentException {
-        if (query == null) throw new IllegalArgumentException("\"query\" is required but got null");
-            
-
-        return new Videos1RequestBuilder(query);
+    public Videos1RequestBuilder videos_1() throws IllegalArgumentException {
+        return new Videos1RequestBuilder();
     }
 }

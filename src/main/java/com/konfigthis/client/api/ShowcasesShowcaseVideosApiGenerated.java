@@ -1854,7 +1854,7 @@ public class ShowcasesShowcaseVideosApiGenerated {
 
     /**
      * Get all the user&#39;s videos that can be added to or removed from a showcase
-     * This endpoint returns every video belonging to the authenticated user that can be added to or removed from the specified showcase. The user must be the owner of the showcase.
+     * This method returns every video belonging to the authenticated user that can be added to or removed from the specified showcase.
      * @param albumId The ID of the showcase. (required)
      * @return ListInShowcaseRequestBuilder
      * @http.response.details

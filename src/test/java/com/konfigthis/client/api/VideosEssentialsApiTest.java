@@ -338,20 +338,21 @@ public class VideosEssentialsApiTest {
      */
     @Test
     public void videos_1Test() throws ApiException {
-        String query = null;
         String direction = null;
         String filter = null;
         String links = null;
         Double page = null;
         Double perPage = null;
+        String query = null;
         String sort = null;
         String uris = null;
-        List<Video> response = api.videos_1(query)
+        List<Video> response = api.videos_1()
                 .direction(direction)
                 .filter(filter)
                 .links(links)
                 .page(page)
                 .perPage(perPage)
+                .query(query)
                 .sort(sort)
                 .uris(uris)
                 .execute();

@@ -229,6 +229,157 @@ public class PaymentsEssentialsApiGenerated {
 
         return new GetPaymentMethodInfoRequestBuilder(paymentMethodId);
     }
+    private okhttp3.Call getSubscriptionInfoCall(String subscriptionId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/users/{user_id}/{subscription_id}"
+            .replace("{" + "subscription_id" + "}", localVarApiClient.escapeString(subscriptionId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2", "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getSubscriptionInfoValidateBeforeCall(String subscriptionId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'subscriptionId' is set
+        if (subscriptionId == null) {
+            throw new ApiException("Missing the required parameter 'subscriptionId' when calling getSubscriptionInfo(Async)");
+        }
+
+        return getSubscriptionInfoCall(subscriptionId, _callback);
+
+    }
+
+
+    private ApiResponse<Void> getSubscriptionInfoWithHttpInfo(String subscriptionId) throws ApiException {
+        okhttp3.Call localVarCall = getSubscriptionInfoValidateBeforeCall(subscriptionId, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private okhttp3.Call getSubscriptionInfoAsync(String subscriptionId, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getSubscriptionInfoValidateBeforeCall(subscriptionId, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    public class GetSubscriptionInfoRequestBuilder {
+        private final String subscriptionId;
+
+        private GetSubscriptionInfoRequestBuilder(String subscriptionId) {
+            this.subscriptionId = subscriptionId;
+        }
+
+        /**
+         * Build call for getSubscriptionInfo
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getSubscriptionInfoCall(subscriptionId, _callback);
+        }
+
+
+        /**
+         * Execute getSubscriptionInfo request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute() throws ApiException {
+            getSubscriptionInfoWithHttpInfo(subscriptionId);
+        }
+
+        /**
+         * Execute getSubscriptionInfo request with HTTP info returned
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
+            return getSubscriptionInfoWithHttpInfo(subscriptionId);
+        }
+
+        /**
+         * Execute getSubscriptionInfo request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
+            return getSubscriptionInfoAsync(subscriptionId, _callback);
+        }
+    }
+
+    /**
+     * Get information about a payments service subscription
+     * This method returns information about the specified Vimeo payments service subscription.
+     * @param subscriptionId The ID of the subscription. (required)
+     * @return GetSubscriptionInfoRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public GetSubscriptionInfoRequestBuilder getSubscriptionInfo(String subscriptionId) throws IllegalArgumentException {
+        if (subscriptionId == null) throw new IllegalArgumentException("\"subscriptionId\" is required but got null");
+            
+
+        return new GetSubscriptionInfoRequestBuilder(subscriptionId);
+    }
     private okhttp3.Call listPaymentMethodsCall(Double userId, String cardmemberName, Double page, Double perPage, Boolean showDisabled, PaymentsEssentialsListPaymentMethodsRequest paymentsEssentialsListPaymentMethodsRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers

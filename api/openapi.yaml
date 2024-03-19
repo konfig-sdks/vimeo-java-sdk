@@ -164,6 +164,8 @@ tags:
   name: On Demand\Purchases and rentals
 - description: Use these methods to work with On Demand seasons.
   name: On Demand\Seasons
+- description: These are the most common methods for making product purchases.
+  name: Payments\Essentials
 - description: Use these methods to work with team members.
   name: Teams\Members
 - description: Use these methods to work with a user's watch history.
@@ -181,8 +183,6 @@ tags:
   name: Embed Presets\Timeline events
 - description: Use these methods to work with M3U8 playback URLs for live event streams.
   name: Live\Event M3U8 playback
-- description: These are the most common methods for making product purchases.
-  name: Payments\Essentials
 - description: Use these methods to work with user analytics.
   name: Users\Analytics
 - description: Use these methods to work with user feeds.
@@ -271,9 +271,8 @@ paths:
       x-accepts: application/vnd.vimeo.endpoint+json
   /albums/{album_id}/available_videos:
     get:
-      description: This endpoint returns every video belonging to the authenticated
-        user that can be added to or removed from the specified showcase. The user
-        must be the owner of the showcase.
+      description: This method returns every video belonging to the authenticated
+        user that can be added to or removed from the specified showcase.
       operationId: ShowcasesShowcaseVideos_listInShowcase
       parameters:
       - description: The ID of the showcase.
@@ -371,7 +370,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: "Error code 3433: The authenticated user can't add videos to\
+          description: "Error code 3200: The authenticated user can't add videos to\
             \ this showcase."
           x-do-not-generate: true
         "404":
@@ -6961,6 +6960,7 @@ paths:
 
           Option descriptions:
            * `country` - Group the results by country.
+           * `device_type` - Group the results by device type.
            * `embed_domain` - Group the results by embed domain.
            * `total` - Group the results by the time range provided.
            * `video` - Group the results by video.
@@ -6971,6 +6971,7 @@ paths:
         schema:
           enum:
           - country
+          - device_type
           - embed_domain
           - total
           - video
@@ -7102,6 +7103,7 @@ paths:
            * `comments` - Sort the results by the number of comments.
            * `country` - Sort the results by country.
            * `default` - Sort the results by the values of both the **dimension** and **time_interval** fields.
+           * `device_type` - Sort the results by device type.
            * `downloads` - Sort the results by the number of downloads.
            * `embed_domain` - Sort the results by embed domain.
            * `finishes` - Sort the results by the number of complete plays.
@@ -7124,6 +7126,7 @@ paths:
           - comments
           - country
           - default
+          - device_type
           - downloads
           - embed_domain
           - finishes
@@ -17310,7 +17313,6 @@ paths:
   /users/{user_id}/albums/{album_id}/custom_thumbnails:
     get:
       description: This method returns every custom thumbnail of the specified showcase.
-        The authenticated user must be the owner of the showcase.
       operationId: ShowcasesCustomShowcaseThumbnails_list
       parameters:
       - description: The ID of the showcase.
@@ -18627,6 +18629,7 @@ paths:
 
           Option descriptions:
            * `country` - Group the results by country.
+           * `device_type` - Group the results by device type.
            * `embed_domain` - Group the results by embed domain.
            * `total` - Group the results by the time range provided.
            * `video` - Group the results by video.
@@ -18637,6 +18640,7 @@ paths:
         schema:
           enum:
           - country
+          - device_type
           - embed_domain
           - total
           - video
@@ -18768,6 +18772,7 @@ paths:
            * `comments` - Sort the results by the number of comments.
            * `country` - Sort the results by country.
            * `default` - Sort the results by the values of both the **dimension** and **time_interval** fields.
+           * `device_type` - Sort the results by device type.
            * `downloads` - Sort the results by the number of downloads.
            * `embed_domain` - Sort the results by embed domain.
            * `finishes` - Sort the results by the number of complete plays.
@@ -18790,6 +18795,7 @@ paths:
           - comments
           - country
           - default
+          - device_type
           - downloads
           - embed_domain
           - finishes
@@ -26784,6 +26790,35 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-patch--users-user_id-webinars-webinar_id-registrants-registrant_id
       x-content-type: application/json
       x-accepts: application/json
+  /users/{user_id}/{subscription_id}:
+    get:
+      description: This method returns information about the specified Vimeo payments
+        service subscription.
+      operationId: PaymentsEssentials_getSubscriptionInfo
+      parameters:
+      - description: The ID of the subscription.
+        explode: false
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-paths--users-user_id-subscription_id-get-parameters-0-schema
+        style: simple
+      responses:
+        "200":
+          description: OK
+      security:
+      - oauth2:
+        - public
+      summary: Get information about a payments service subscription
+      tags:
+      - Payments\Essentials
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-user_id-subscription_id
+      x-accepts: application/json
   /videos:
     get:
       description: This method returns all the videos that match custom search criteria.
@@ -26887,7 +26922,7 @@ paths:
         explode: true
         in: query
         name: query
-        required: true
+        required: false
         schema:
           example: staff picks
           type: string
@@ -32194,6 +32229,12 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-analytics-properties-average_time_watched
         country:
           $ref: '#/components/schemas/analytics_country'
+        device_type:
+          description: The type of device.
+          example: Desktop
+          type: string
+          x-konfig-original-example: Desktop
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-analytics-properties-device_type
         downloads:
           description: The number of downloads of the corresponding Vimeo content.
           example: 1
@@ -32262,6 +32303,7 @@ components:
       - average_percent_watched
       - average_time_watched
       - country
+      - device_type
       - downloads
       - embed_domain
       - end_date
@@ -40999,6 +41041,145 @@ components:
       - name
       - uri
       title: Skill
+      type: object
+    subscription:
+      properties:
+        account_id:
+          description: The ID of the account.
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-account_id
+        auto_renew:
+          description: Whether the subscription is set to auto-renew.
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-auto_renew
+        created_at:
+          description: The time in ISO 8601 format when the subscription was created.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-created_at
+        disabled_at:
+          description: The time in ISO 8601 format when the subscription was disabled.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-disabled_at
+        end_date:
+          description: The time in ISO 8601 format when the subscription ended.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-end_date
+        grace_period_id:
+          description: The ID of the grace period.
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-grace_period_id
+        id:
+          description: The ID of the subscription.
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-id
+        is_latest:
+          description: Whether the subscription is the latest version.
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-is_latest
+        items:
+          description: An array of items in the subscription.
+          items:
+            $ref: '#/components/schemas/subscription_items_inner'
+          type: array
+        payment_method_id:
+          description: The ID of the payment method.
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-payment_method_id
+        start_date:
+          description: The time in ISO 8601 format when the subscription started.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-start_date
+        status:
+          description: |
+            The status of the subscription.
+
+            Option descriptions:
+             * `0` - The subscription status is unspecified.
+             * `1` - The subscription is active.
+             * `2` - The subscription is canceled.
+             * `3` - The subscription is in a grace period.
+             * `4` - The subscription is in a trial period.
+             * `5` - The subscription is past due.
+             * `6` - The subscription is unpaid.
+          enum:
+          - "0"
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          example: "1"
+          type: string
+          x-konfig-original-example: "1"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-status
+        subscription_number:
+          description: The number of the subscription.
+          example: "12345"
+          type: string
+          x-konfig-original-example: "12345"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-subscription_number
+        subscription_version:
+          description: The version of the subscription.
+          example: 1
+          type: number
+          x-konfig-original-example: 1
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-subscription_version
+        synced_at:
+          description: The time in ISO 8601 format when the subscription was synced.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-synced_at
+        updated_at:
+          description: The time in ISO 8601 format when the subscription was updated.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-updated_at
+        vendor:
+          description: The vendor of the subscription.
+          example: vimeo
+          type: string
+          x-konfig-original-example: vimeo
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-vendor
+      required:
+      - auto_renew
+      - created_at
+      - end_date
+      - grace_period_id
+      - id
+      - is_latest
+      - items
+      - payment_method_id
+      - start_date
+      - status
+      - subscription_number
+      - subscription_version
+      - synced_at
+      - updated_at
+      - vendor
+      title: Subscription
       type: object
     subscription-plans:
       properties:
@@ -54588,6 +54769,10 @@ components:
       example: f19bfa08-b266-4f20-bfce-db1d0719b52f
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-paths--users-user_id-subscription_id-get-parameters-0-schema:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--videos-get-parameters-0-schema:
       example: asc
       type: string
@@ -55470,6 +55655,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-analytics-properties-country-properties-name:
       example: United States
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-analytics-properties-device_type:
+      example: Desktop
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-analytics-properties-downloads:
@@ -58293,6 +58482,102 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-skill-properties-uri:
       example: /marketplace/skills/152184
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-account_id:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-auto_renew:
+      example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-created_at:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-disabled_at:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-end_date:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-grace_period_id:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-id:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-is_latest:
+      example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-billing_plan_id:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-created_at:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-id:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-promo_code:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-promo_code_id:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-quantity:
+      example: 1
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-synced_at:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-updated_at:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-payment_method_id:
+      example: abc12345
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-start_date:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-status:
+      example: "1"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-subscription_number:
+      example: "12345"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-subscription_version:
+      example: 1
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-synced_at:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-updated_at:
+      example: 2020-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-subscription-properties-vendor:
+      example: vimeo
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-subscription-plans-properties-currency-properties-currency_code:
@@ -67000,6 +67285,7 @@ components:
         dimension:
           enum:
           - country
+          - device_type
           - embed_domain
           - total
           - video
@@ -67067,6 +67353,7 @@ components:
           - comments
           - country
           - default
+          - device_type
           - downloads
           - embed_domain
           - finishes
@@ -74724,6 +75011,7 @@ components:
         dimension:
           enum:
           - country
+          - device_type
           - embed_domain
           - total
           - video
@@ -74791,6 +75079,7 @@ components:
           - comments
           - country
           - default
+          - device_type
           - downloads
           - embed_domain
           - finishes
@@ -80576,6 +80865,19 @@ components:
       - registrant_id
       - user_id
       - webinar_id
+    konfig-generated-schema-single-parameter-schema-get--users-user_id-subscription_id:
+      properties:
+        subscription_id:
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-paths--users-user_id-subscription_id-get-parameters-0-schema
+      required:
+      - subscription_id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - subscription_id
     konfig-generated-schema-single-parameter-schema-get--videos:
       properties:
         direction:
@@ -80638,8 +80940,6 @@ components:
           type: string
           x-konfig-original-example: "/videos/122375452,/videos/273576296"
           x-konfig-generated-schema: konfig-generated-schema-paths--videos-get-parameters-7-schema
-      required:
-      - query
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
@@ -90073,6 +90373,67 @@ components:
           $ref: '#/components/schemas/reply_metadata_connections'
       required:
       - connections
+      type: object
+    subscription_items_inner:
+      properties:
+        billing_plan_id:
+          description: The ID of the billing plan for the subscription item.
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-billing_plan_id
+        created_at:
+          description: The time in 8601 format when the subscription item was created.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-created_at
+        id:
+          description: The ID of the subscription item.
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-id
+        metadata:
+          description: The metadata of the subscription item.
+          type: object
+        promo_code:
+          description: The promotional code for the subscription item.
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-promo_code
+        promo_code_id:
+          description: The ID of the promotional code for the subscription item.
+          example: abc12345
+          type: string
+          x-konfig-original-example: abc12345
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-promo_code_id
+        quantity:
+          description: The quantity of the subscription item.
+          example: 1
+          type: number
+          x-konfig-original-example: 1
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-quantity
+        synced_at:
+          description: The time in 8601 format when the subscription item was synced.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-synced_at
+        updated_at:
+          description: The time in 8601 format when the subscription item was updated.
+          example: 2020-01-01T00:00:00Z
+          type: string
+          x-konfig-original-example: 2020-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-subscription-properties-items-items-properties-updated_at
+      required:
+      - billing_plan_id
+      - created_at
+      - id
+      - quantity
+      - synced_at
+      - updated_at
       type: object
     subscription_plans_currency:
       description: Information about the currency in which the price of the plan is

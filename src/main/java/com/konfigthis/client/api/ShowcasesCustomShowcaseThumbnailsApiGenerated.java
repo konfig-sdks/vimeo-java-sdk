@@ -760,7 +760,7 @@ public class ShowcasesCustomShowcaseThumbnailsApiGenerated {
 
     /**
      * Get all the custom thumbnails of a showcase
-     * This method returns every custom thumbnail of the specified showcase. The authenticated user must be the owner of the showcase.
+     * This method returns every custom thumbnail of the specified showcase.
      * @param albumId The ID of the showcase. (required)
      * @param userId The ID of the user. (required)
      * @return ListRequestBuilder

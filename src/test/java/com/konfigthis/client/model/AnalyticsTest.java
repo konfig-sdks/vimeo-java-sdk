@@ -65,6 +65,14 @@ public class AnalyticsTest {
     }
 
     /**
+     * Test the property 'deviceType'
+     */
+    @Test
+    public void deviceTypeTest() {
+        // TODO: test deviceType
+    }
+
+    /**
      * Test the property 'downloads'
      */
     @Test

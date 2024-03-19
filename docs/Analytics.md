@@ -10,6 +10,7 @@
 |**averagePercentWatched** | **Double** | The average percent watched in seconds of the corresponding Vimeo content. |  |
 |**averageTimeWatched** | **Double** | The average time watched in seconds of the corresponding Vimeo content. |  |
 |**country** | [**AnalyticsCountry**](AnalyticsCountry.md) |  |  |
+|**deviceType** | **String** | The type of device. |  |
 |**downloads** | **Double** | The number of downloads of the corresponding Vimeo content. |  |
 |**embedDomain** | **String** | The domain name of the website. |  |
 |**endDate** | **String** | The end time of the time interval in ISO 8601 format. |  |

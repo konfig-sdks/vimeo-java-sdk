@@ -58,6 +58,21 @@ public class PaymentsEssentialsApiTest {
     }
 
     /**
+     * Get information about a payments service subscription
+     *
+     * This method returns information about the specified Vimeo payments service subscription.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getSubscriptionInfoTest() throws ApiException {
+        String subscriptionId = null;
+        api.getSubscriptionInfo(subscriptionId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
      * Get a list of all payments service payment methods
      *
      * This method returns a list of all Vimeo payments service payment methods that are available to the authenticated user.
